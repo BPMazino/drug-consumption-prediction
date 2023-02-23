@@ -38,4 +38,4 @@ e) Le point de vigilance se situe principalement dans l'équilibre des données.
 On remarque un déséquilibre concernant certaines données. Par exemple 90% des données ont été récupérées dans des pays anglophones et plus particulièrement 80% aux USA et au Royaume-Uni.
 
 Concernant la mesure de performance :
-La métrique "Balanced Accuracy" semble être une bonne chose pour des données équilibrées.
+La métrique "Balanced Accuracy" semble être une bonne chose pour des données déséquilibrées.
