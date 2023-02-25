@@ -17,7 +17,9 @@ Link : <https://archive.ics.uci.edu/ml/datasets/Drug+consumption+%28quantified%2
 
 a) L'objectif est de déterminer si une personne est un consommateur de drogue. On considère une personne comme consommateur si elle a consommé de la drogue lors de l'année en cours. Nous allons commencer par nous concentrer sur la consommation de cannabis.
 
-b) La travail sera une tâche supervisé de classification binaire. On aurait pu faire en multiclasse mais comme il y a une notion d'ordre entre ces classes, que le sens des classes n'est pas significatif et pour simplifié ce problème, nous avons choisi de se limiter à une classification binaire.
+b) La travail sera une tâche supervisé de classification binaire. 
+On aurait pu faire en multiclasse mais comme il y a une notion d'ordre entre ces classes, que le sens des classes n'est pas significatif. Une regression pourrait être intéressante pour retrouver cette notion d'ordre des classes. Aussi on pourra faire un "vecteur de prédiction" pour les 18 drogues concernées.
+Tout ces axes pourront être explorer dans le projet.
 
 c) La database archive 1885 personnes interrogées. Pour chaque personne, il y a 12 attributs : l'ID pour référence dans la database, l'age, le genre, l'education, le pays de résidence, l'appartenance ethnique et une mesure de la personnalité selon les critères NEO-FFI-R (neuroticism, extraversion, openness to experience, agreeableness, and conscientiousness), BIS-11 (impulsivity), et ImpSS (sensation seeking).
 
@@ -38,7 +40,7 @@ On pourra alors tester plusieurs de ces algorithmes et faire un tableau de compa
 e) Le point de vigilance se situe principalement dans l'équilibre des données. Concernant le cannabis le nombre de personnes ayant pris ou non du cannabis est plutôt équilibré. Nonobstant un léger rééquilibrage semble nécessaire.\
 On remarque un déséquilibre concernant certaines données. Par exemple 90% des données ont été récupérées dans des pays anglophones et plus particulièrement 80% aux USA et au Royaume-Uni.
 
-Concernant les hypers paramètres, on fera de la cross validation et on testera la feature map au vu du nombre raisonnable d'attribut et la régularisation.
+Concernant les hypers paramètres, on fera de la cross validation et on testera la feature map au vu du nombre raisonnable d'attribut et la régularisation si il y a des problèmes d'overfitting.
 
 Concernant la mesure de performance :
 La métrique "Balanced Accuracy" semble être une bonne chose pour des données déséquilibrées. On peut aussi se posé la question de si on préfère éviter les faux négatifs ou les faux positifs. Je pense qu'identifier un non-user en user est plus intéréssant dans l'idée de chercher les profils à risque.
