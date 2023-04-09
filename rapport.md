@@ -61,3 +61,13 @@ Après cela, nous avons comparé différent models et nous avons pu observé qu'
 Choix du model(arbre de decision puis randomForest), choix des drogues à prédire, test hyper parametre, matrices de confusion  
 Conclusion : pas de très bon résultat, on aurait surement pu faire mieux avec plusieurs classificateurs binaires si on avait le temps de les entrainer  
 
+Pour réaliser une classification multi label, nous avons décider de nous occuper uniquement des 15 drogues illégales. Nous avons donc retirer les drogues suivantes : chocolat, cafféine et alcohol ainsi que semeron puisque ce n'est pas une vraie drogue.  
+
+Nous avons d'abord fait la classification avec un arbre de décision pour pouvoir comparer nos résultats avec la classification bianaire. Pour afficher nos résultats, nous avons choisi de faire une matrice de confusion par drogue ainsi que de calculer les roc auc score et balanced accuracy score moyens.  
+Nous avons obtenue une balanced accuracy de 0.60. Il n'y avait que quelques drogues qui étaient pas trop mal classé. Certaines drogues pour lesquelles il y a très peu de consommateurs n'étaient pas vraiment classé, tous les échantillons étaient considéré comme non-consommateur.  
+
+Nous avons ensuite fait la classification avec une random forest puisque cela semblait être un des meilleurs modèles selon nos analyses précédentes et qu'elle utilise encore des arbres de décisions. Nous nous sommes aussi dit que le hasard qu'apportait la random forest permettrait peut-être de moins être affecté par le problème d'équilibrage entre les consommateurs et les non-consommateurs de certaines drogues.  
+Avec la random forest nous restions à un balanced accuracy score d'environ 0.60 donc nous avons réaliser des tests d'hyper-paramètres pour essayer d'améliorer nos résultats mais les différents tests ne permettaient pas d'améliorer le score, juste de connaître l'overfitting.  
+
+Nous pensons qu'en réalisant un model de classification binaire pour chacune des drogues nous aurions sûrement pu avoir de meilleurs résultats, cependant cela nous aurais pris bien plus de temps.
+
