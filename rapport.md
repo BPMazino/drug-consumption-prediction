@@ -46,17 +46,18 @@ Nous avons ensuite fait des tests d'hyper-paramètres avec de la cross-validatio
 Nous n'avons donc pas réussi à améliorer notre model plus que cela et nous nous sommes demandé si avec un autre modèle nous aurions pu avoir de meilleurs résultats.
 
 
-## Analyse plus avancé des données
-matrice de corrélation, comparaison des models
-Conclusion : un arbre de décisions n'était pas un très bon choix bon notre problème, une regression linéaire ou une randomForest auraient surement été plus intéressantes  
+## Analyse plus avancé des données  
 
 Après n'avoir pas réussi à obtenir de meilleur résultat avec notre premier model, nous avons réaliser de nouvelles analyses des données.  
 
 Nous avons d'abord réalisé une matrice de corrélation qui nous a permis de voir que la plupart des résultat des tests psychologiques n'étaient que peu corréler entre eux. Les plus importantes corrélations étaient entre l'impulsivité et la recherche de sensation ainsi que entre l'ouverture à l'expérience et la recherche de sensation. On pouvait aussi voir que le névrosisme et l'extraversion était plutôt inversement corréler.  
 
-Nous avons ensuite observé la corrélation entre chacune des caractéristique et la consommation de cannabis. 
+Nous avons ensuite observé la corrélation entre chacune des caractéristique et la consommation de cannabis. Ces corrélations correspondaient aux branchement que nous avions avec l'arbre de décision.  
+
+Après cela, nous avons comparé différent models et nous avons pu observé qu'utiliser un arbre de décision pour réaliser cette classification n'était pas le meilleur choix. Utiliser une random forest ou une régression linéaire aurait été plus efficace.  
 
 
 ## Classification multi label
 Choix du model(arbre de decision puis randomForest), choix des drogues à prédire, test hyper parametre, matrices de confusion  
-Conclusion : pas de très bon résultat, on aurait surement pu faire mieux avec plusieurs classificateurs binaires si on avait le temps de les entrainer
+Conclusion : pas de très bon résultat, on aurait surement pu faire mieux avec plusieurs classificateurs binaires si on avait le temps de les entrainer  
+
