@@ -20,9 +20,9 @@ Il y a en plus de cela 18 colonnes qui nous donnent des informations sur la cons
 Ces données là ne sont pas des floats mais des string de la forme CLx où x est remplacé par un chiffre indiquant une certaine classe (CL0 = n'a jamais consommé cette drogue, CL7 = en a consommé dans la journée).
 
 ### Présentations des tâches prévus
-Preprocessing, classification binaire sur une drogue, classification multilabel
-Avec les données que nous avions, nous avions prévu de faire du préprocessing avant de pouvoir commencer nos tâches de classification.  
-Notre dataset nous permettait d'aborder plusieurs problèmes de classifications différents. Nous avons décider de d'abord effectuer une classification binaire sur une drogue pour savoir si une personne est consommatrice ou non. Ensuite nous souhaitions réaliser une classification multilabel permettant de savoir si une personne consomme ou non chacune des drogues.
+
+Notre dataset nous permettait d'aborder plusieurs problèmes de classifications différents. Nous avons décider de d'abord effectuer une classification binaire sur une drogue pour savoir si une personne est consommatrice ou non. Ensuite nous souhaitions réaliser une classification multilabel permettant de savoir si une personne consomme ou non chacune des drogues.  
+Avant tout cela nous avions aussi du préprocessing à faire pour pouvoir utiliser nos données.
 
 
 ## Préprocessing
@@ -35,17 +35,26 @@ Ensuite nous avons décidé d'appliquer un one hot à certaines colonnes. Nous a
 Nous avons aussi appliquer une fonction permettant de standardiser toutes nos valeurs pour essayer d'avoir de meilleurs résultats.
 
 ## Classification binaire pour une drogue
-Choix de la drogue, choix du model (arbre de decision), separation train/valid/test, test hyper parametre avec cross validation  
-Conclusion : résultat pas très satisfaisant  
 
 Nous avons choisi de réaliser notre classification binaire avec le cannabis car c'est la drogue pour laquelle le nombre de consommateurs est le plus proche du nombre de non consommateurs. Nous nous sommes donc dit que ce serait plus pratique pour pouvoir avoir un model efficace.  
-Nous avons choisi d'utiliser un arbre de décision pour effectuer cette classification car on peut facilement visualiser les différents branchement.
 
+Nous avons choisi d'utiliser un arbre de décision pour effectuer cette classification car on peut facilement visualiser les différents branchement.  
+Nous avons effectuez une séparation du dataset en conservant 20% des données pour le test final et 80% pour l'entrainement et la validation.  
+
+Nous avons ensuite fait des tests d'hyper-paramètres avec de la cross-validation pour essayer de trouver quelle manière de limiter la taille de l'arbre était la plus efficace. Cependant quelque soit le paramètre choisi, on restait à un score de balanced accuracy d'environ 0.80, seul l'overfitting variait.  
+
+Nous n'avons donc pas réussi à améliorer notre model plus que cela et nous nous sommes demandé si avec un autre modèle nous aurions pu avoir de meilleurs résultats.
 
 
 ## Analyse plus avancé des données
 matrice de corrélation, comparaison des models
-Conclusion : un arbre de décisions n'était pas un très bon choix bon notre problème, une regression linéaire ou une randomForest auraient surement été plus intéressantes
+Conclusion : un arbre de décisions n'était pas un très bon choix bon notre problème, une regression linéaire ou une randomForest auraient surement été plus intéressantes  
+
+Après n'avoir pas réussi à obtenir de meilleur résultat avec notre premier model, nous avons réaliser de nouvelles analyses des données.  
+
+Nous avons d'abord réalisé une matrice de corrélation qui nous a permis de voir que la plupart des résultat des tests psychologiques n'étaient que peu corréler entre eux. Les plus importantes corrélations étaient entre l'impulsivité et la recherche de sensation ainsi que entre l'ouverture à l'expérience et la recherche de sensation. On pouvait aussi voir que le névrosisme et l'extraversion était plutôt inversement corréler.  
+
+Nous avons ensuite observé la corrélation entre chacune des caractéristique et la consommation de cannabis. 
 
 
 ## Classification multi label
