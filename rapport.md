@@ -87,7 +87,7 @@ $$Specitfity = TN/(TN+FP)$$
 Dans notre cas, nous avons choisi la balanced accuracy score :
 $$Balanced Accuracy = \frac{(Sensitivity + Specificity)}{2}$$  
 
-Ce choix de score s'explique par le fait que par précaution même si les données sont équilibrées il s'avère que cela est la meilleure métrique, au pire si elles sont balancées cela revient au même que d'utiliser l'accuracy score classique.
+Ce choix de score s'explique par le fait que, par précaution, même si les données sont équilibrées, il s'avère que cela est la meilleure métrique, au pire si elles sont balancées cela revient au même que d'utiliser l'accuracy score classique.
 
 Une autre métrique intéressante que nous avons utilisé est l'aire sous la courbe ROC. Elle mesure la capacité d'un modèle à classer correctement des exemples positifs et négatifs à travers différents seuils de classification. L'aire sous la courbe ROC (AUC) est un résumé de la performance du modèle sur l'ensemble des seuils possibles. L'AUC varie de 0 à 1, où une valeur de 1 indique une performance parfaite et une valeur de 0,5 représente un modèle aléatoire.
 
@@ -114,7 +114,6 @@ Nous n'avons donc pas réussi à améliorer notre model plus que cela et nous no
 
 Nous remarquons tout de même plusieurs choses par la lecture de l'arbre de décision.
 Les features qui semblent être intéressantes sont la position géographique, l'âge et la recherche de sensation de l'individu.
-
 
 
 ## Analyse plus avancé des données  
