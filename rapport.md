@@ -7,7 +7,9 @@ De Amorim Matthias
 Mesbah Slimane
 
 
-## Présentation du projet
+## Introduction 
+Dans ce projet, nous avons cherché à analyser et prédire la consommation de drogues chez les individus à partir d'un ensemble de données sur les caractéristiques démographiques et psychologiques. Ce rapport décrit en détail les différentes étapes de notre projet, y compris la préparation des données, l'exploration des données, la construction de modèles de prédiction et l'évaluation de leur performance.
+## Présentation du jeu de données
 ### Description des données
 Le jeu de données est nommé Drug consumption (quantified) Data Set.
 Link : <https://archive.ics.uci.edu/ml/datasets/Drug+consumption+%28quantified%29>  
@@ -36,6 +38,30 @@ Ensuite nous avons décidé d'appliquer un one hot à certaines colonnes. Nous a
 
 Nous avons aussi appliquer une fonction permettant de standardiser toutes nos valeurs pour essayer d'avoir de meilleurs résultats.
 
+Comme nous l'avons remarqué lors de la visualisation des données, certaines valeurs semblaient être en majorité par rapport à d'autres. Par exemple le nombre d'individus vivant aux USA ou en UK est bien plus important que les individus vivant en Nouvelle-Zélande par exemple. Dans ce genre de cas, le modèle peut avoir du mal à apprendre. Nous avons donc décider de fusionner certaines valeurs : 
+
+```py
+df_cannabis["country"] = df_cannabis["country"].replace(["Other", "Canada", "Australia", "New Zealand", "Republic of Ireland"], "Other")
+
+
+df_cannabis["education"] = df_cannabis["education"].replace(["left school at 18", "left school at 16", "left school at 17", "left school before 16"], "left school before 18 (included)")
+
+df_cannabis["age"] = df_cannabis["age"].replace(["45-54", "55-64", "65+"], "55+")
+```
+Exemple : 
+
+| country             | before | after |
+|---------------------|--------|-------|
+| UK                  | 1044   | 1044  |
+| USA                 | 551    | 551   |
+| Other               | 118    | 282   |
+| Canada              | 87     | 0     |
+| Australia           | 52     | 0     |
+| Republic of Ireland | 20     | 0     |
+| New Zealand         | 5      | 0     |
+
+Cependant il semblerait que cela augmente l'overfitting de notre modèle.
+
 ## Arbre de décision
 
 L'arbre de décision est un algorithme de classification. Il consiste a créé des noeuds. Chaque noeud pose un seuil sur une feature qui sépare les données en deux. Avec les hyper paramètres que nous avons utilisé, ce seuil est définie en parcourant toutes les features pour trouver la meilleur séparation, c'est-à-dire, dans le cas de notre classification binaire, le plus de consommateurs et le moins de non-consommateurs d'un côté et inversement de l'autre côté. Ces noeuds permettent de classer les données dans différentes feuilles où l'ont peut supposer la classe des données dedans.
@@ -55,11 +81,26 @@ Nous avons effectuez une séparation du dataset en conservant 20% des données p
 Dans le cadre d'une classification binaire plusieurs métriques sont possibles: precision , accuracy, sensitivity, specitificity.
 On note: TP(resp FP) les vrais(resp faux) positifs, TN(resp FN) les vrais(resp faux) négatifs,
 $$Sensitivity = TP/(TP+FN)$$ 
-et $$ Specitfity = TN/(TN+FP) $$ 
+et 
+$$Specitfity = TN/(TN+FP)$$ 
 
-Dans notre cas, nous avons choisi la balanced accuracy score :$$ Balanced Accuracy = \frac{(Sensitivity + Specificity)}{2}$$  
+Dans notre cas, nous avons choisi la balanced accuracy score :
+$$Balanced Accuracy = \frac{(Sensitivity + Specificity)}{2}$$  
 
 Ce choix de score s'explique par le fait que par précaution même si les données sont équilibrées il s'avère que cela est la meilleure métrique, au pire si elles sont balancées cela revient au même que d'utiliser l'accuracy score classique.
+
+Une autre métrique intéressante que nous avons utilisé est l'aire sous la courbe ROC. Elle mesure la capacité d'un modèle à classer correctement des exemples positifs et négatifs à travers différents seuils de classification. L'aire sous la courbe ROC (AUC) est un résumé de la performance du modèle sur l'ensemble des seuils possibles. L'AUC varie de 0 à 1, où une valeur de 1 indique une performance parfaite et une valeur de 0,5 représente un modèle aléatoire.
+
+La courbe ROC est construite en traçant le taux de vrais positifs (sensitivity) en fonction du taux de faux positifs (1 - specificity) pour différents seuils de décision. Le taux de vrais positifs (TPR) est défini comme suit :
+
+$$TPR = TP / (TP + FN)$$
+
+
+$$FPR = FP / (FP + TN)$$
+
+L'AUC est calculée en intégrant la courbe ROC, c'est-à-dire en calculant l'aire sous la courbe formée par les points (FPR, TPR) pour tous les seuils de classification possibles.
+
+La ROC_AUC est utile comme métrique pour la classification binaire, car elle fournit une mesure globale de la performance d'un modèle sur l'ensemble des seuils de classification, ce qui permet de comparer facilement différents modèles. Elle est particulièrement utile lorsque les classes sont déséquilibrées (par exemple, beaucoup plus d'exemples négatifs que positifs) ou lorsque les coûts de classification incorrecte sont très différents pour les deux classes. Dans de telles situations, la précision globale ou le F1-score peuvent ne pas refléter correctement les performances du modèle.
 
 ### Résultat du modèle 
 ![Plot de l'arbre de décision](./images/arbre_de_decision_cannabis.png)
@@ -73,6 +114,7 @@ Nous n'avons donc pas réussi à améliorer notre model plus que cela et nous no
 
 Nous remarquons tout de même plusieurs choses par la lecture de l'arbre de décision.
 Les features qui semblent être intéressantes sont la position géographique, l'âge et la recherche de sensation de l'individu.
+
 
 
 ## Analyse plus avancé des données  
@@ -91,13 +133,21 @@ Après cela, nous avons comparé différent modèles et nous avons pu observé q
 
 Random Forest utilise le principe de Decision Tree dans son fonctionnement. Il va créé de nombreux arbres de décision puis faire la moyenne de chaque arbre pour parvenir à un résultat. Ceci dit, chaque arbre sera différent car les données d'entrée de chacun seront différente et que à la place de parcourir toutes les features à chaque noeud, seul une partie sera exploré. Ce modèle peut limiter l'overfitting possible du décision tree.
 
+
+![Compairaison de modèles ROC_AUC](./images/model_comparaison_roc.png)
+
+La courbe ROC nous permet d'avoir une autre perspective sur les modèles par rapport à un modèle complètement aléatoire (en pointillé).
+
+
 ## Classification multi label
 
 Pour réaliser une classification multi label, nous avons décider de nous occuper uniquement des 15 drogues illégales. Nous avons donc retirer les drogues suivantes : chocolat, cafféine et alcohol ainsi que semeron puisque ce n'est pas une vraie drogue.  
 
 Nous avons d'abord fait la classification avec un arbre de décision car cet algorythme peut traiter une target multilabel. En effet, les noeuds vont chercher à trouver la meilleur séparation en regardant tout les labels. La conséquence que l'ont va observer est que les labels déséquilibrés vont mal être prédits.
 
-De plus, nous pourrons comparer nos résultats avec la classification bianaire fait précédemment. Pour afficher nos résultats, nous avons choisi de faire une matrice de confusion par drogue ainsi que de calculer les roc auc score et balanced accuracy score moyens.  
+De plus, nous pourrons comparer nos résultats avec la classification bianaire fait précédemment. Pour afficher nos résultats, nous avons choisi de faire une matrice de confusion par drogue ainsi que de calculer les roc auc score et balanced accuracy score moyens. 
+
+
 Nous avons obtenue une balanced accuracy de 0.62. Il n'y avait que quelques drogues qui étaient pas trop mal classé. Certaines drogues pour lesquelles il y a très peu de consommateurs n'étaient pas vraiment classé, tous les échantillons étaient considéré comme non-consommateur.  
 
 ![Matrices de confusion avec l'arbre de décision](./images/matrice_de_confusion_arbre_de_decision.png)
@@ -109,5 +159,13 @@ Avec la random forest nous restions à un balanced accuracy score d'environ 0.63
 
 ![Figure du test des hyper-paramètres de la random forest](./images/test_hyperparam_random_forest.png)
 
-Nous pensons qu'en réalisant un model de classification binaire pour chacune des drogues nous aurions sûrement pu avoir de meilleurs résultats, cependant cela nous aurais pris bien plus de temps.
+On observe un overfitting significatif.
+
+## Conclusion
+
+Nous pensons que si nous avions réalisé un modèle de classification binaire pour chacune des drogues, nous aurions probablement pu obtenir de meilleurs résultats. Cependant, cette approche aurait été beaucoup plus longue et coûteuse en termes de temps et de ressources.
+
+En conclusion, bien que la classification multi-label pour plusieurs drogues ait présenté des défis, notamment en raison du déséquilibre entre les consommateurs et les non-consommateurs pour certaines drogues, les modèles de forêt aléatoire ont permis d'obtenir des résultats légèrement meilleurs que les arbres de décision. Il pourrait être intéressant d'explorer d'autres modèles ou approches pour améliorer davantage la performance de la classification multi-label notamment le boosting ou l'apprentissage ensembliste.
+
+Cependant ces deux derniers aurait demandé des explications fournies car nous n'avons pas vu ces deux méthodes en cours. Cependant en général ces deux méthodes fournissent de bien meilleurs résultats.
 
