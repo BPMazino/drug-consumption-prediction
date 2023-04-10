@@ -34,6 +34,10 @@ Ensuite nous avons décidé d'appliquer un one hot à certaines colonnes. Nous a
 
 Nous avons aussi appliquer une fonction permettant de standardiser toutes nos valeurs pour essayer d'avoir de meilleurs résultats.
 
+## Arbre de décision
+
+L'arbre de décision est un algorithme de classification. Il consiste a créé des noeuds. Chaque noeud pose un seuil sur une feature qui sépare les données en deux. Avec les hyper paramètres que nous avons utilisé, ce seuil est définie en parcourant toutes les features pour trouver la meilleur séparation, c'est-à-dire, dans le cas de notre classification binaire, le plus de consommateurs et le moins de non-consommateurs d'un côté et inversement de l'autre côté. Ces noeuds permettent de classer les données dans différentes feuilles où l'ont peut supposer la classe des données dedans.
+
 ## Classification binaire pour une drogue
 
 Nous avons choisi de réaliser notre classification binaire avec le cannabis car c'est la drogue pour laquelle le nombre de consommateurs est le plus proche du nombre de non consommateurs. Nous nous sommes donc dit que ce serait plus pratique pour pouvoir avoir un model efficace.  
@@ -64,11 +68,15 @@ Après cela, nous avons comparé différent models et nous avons pu observé qu'
 
 ![Figure de comparaison de plusieurs models](./images/model_comparaison.png)
 
+## Random Forest
+
 ## Classification multi label
 
 Pour réaliser une classification multi label, nous avons décider de nous occuper uniquement des 15 drogues illégales. Nous avons donc retirer les drogues suivantes : chocolat, cafféine et alcohol ainsi que semeron puisque ce n'est pas une vraie drogue.  
 
-Nous avons d'abord fait la classification avec un arbre de décision pour pouvoir comparer nos résultats avec la classification bianaire. Pour afficher nos résultats, nous avons choisi de faire une matrice de confusion par drogue ainsi que de calculer les roc auc score et balanced accuracy score moyens.  
+Nous avons d'abord fait la classification avec un arbre de décision car cet algorythme peut traiter une target multilabel. En effet, les noeuds vont chercher à trouver la meilleur séparation en regardant tout les labels. La conséquence que l'ont va observer est que les labels déséquilibrés vont mal être prédits.
+
+De plus, nous pourrons comparer nos résultats avec la classification bianaire fait précédemment. Pour afficher nos résultats, nous avons choisi de faire une matrice de confusion par drogue ainsi que de calculer les roc auc score et balanced accuracy score moyens.  
 Nous avons obtenue une balanced accuracy de 0.62. Il n'y avait que quelques drogues qui étaient pas trop mal classé. Certaines drogues pour lesquelles il y a très peu de consommateurs n'étaient pas vraiment classé, tous les échantillons étaient considéré comme non-consommateur.  
 
 ![Matrices de confusion avec l'arbre de décision](./images/matrice_de_confusion_arbre_de_decision.png)
