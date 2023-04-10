@@ -1,3 +1,6 @@
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: [['$', '$']]}, messageStyle: "none" });</script>
+
 # Projet d'IAS
 
 ### groupe
@@ -16,7 +19,7 @@ Le jeu de données est nommé Drug consumption (quantified) Data Set.
 Link : <https://archive.ics.uci.edu/ml/datasets/Drug+consumption+%28quantified%29>  
 
 Les colonnes de ce dataset correspondent à un ID et différentes caractéristiques des personnes ayant participé à l'étude : âge, genre, niveau d'éducation, pays de résidence, ethnicité ainsi que des résultats aux tests psychologiques NEO-FFI-R, BIS-11 et impSS. Ces tests permettent de mesurer les caractéristiques suivantes : névrosisme, extraversion, ouverture à l'expérience, agréabilité, conscienciosité, impulsivité et la recherche de sensation.\
-Dans le jeu données toutes les valeurs sont des floats ce qui ne pose pas de problème pour certaines caractéristique comme les résultats aux tests psychologiques mais qui a moins de sens pour d'autres informations comme le genre ou le pays de résidence.\
+Dans le jeu données toutes les valeurs sont des floats ce qui ne pose pas de problème pour certaines caractéristique comme les résultats aux tests psychologiques mais qui a moins de sens pour d'autres informations comme le genre ou le pays de résidence.
 
 Parmi les personnes ayant participé à l'étude, il y a un nombre équivalent d'hommes et de femmes. On peut voir que les jeunes sont plus représenté avec environ un tiers des participants ayant entre 18 et 24 ans. Ces personnes viennent majoritairement du Royaume-Unis et des Etats-Unis (respectivement 55% et 30% des personnes). En observant le niveau d'études des participants, on se rend compte que peu on arrêté les cours à 18 ans ou avant, la majorité ont été jusqu'à l'université. Les résultats des tests psychologiques semble plus dure à analyser, en traçant des histogramme on peut tout de même voir que la distribution des résultats ressemble à des gaussiennes.
 
