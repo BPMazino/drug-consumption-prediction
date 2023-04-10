@@ -15,7 +15,7 @@ Link : <https://archive.ics.uci.edu/ml/datasets/Drug+consumption+%28quantified%2
 Les colonnes de ce dataset correspondent à un ID et différentes caractéristiques des personnes ayant participé à l'étude : âge, genre, niveau d'éducation, pays de résidence, ethnicité ainsi que des résultats aux tests psychologiques NEO-FFI-R, BIS-11 et impSS. Ces tests permettent de mesurer les caractéristiques suivantes : névrosisme, extraversion, ouverture à l'expérience, agréabilité, conscienciosité, impulsivité et la recherche de sensation.\
 Dans le jeu données toutes les valeurs sont des floats ce qui ne pose pas de problème pour certaines caractéristique comme les résultats aux tests psychologiques mais qui a moins de sens pour d'autres informations comme le genre ou le pays de résidence.  
 
-Il y a en plus de cela 18 colonnes qui nous donnent des informations sur la consommation de différentes drogues, dont une drogue fictive. Pour chaque drogue, on sait si la personne ne la jamais consommé, en a consommé il y a plus de dix ans, consommé il y a moins de dix ans, moins d'un an, moins d'un mois, moins d'une semaine ou dans la dernière journée.\
+Il y a en plus de cela 19 colonnes qui nous donnent des informations sur la consommation de différentes drogues, dont une drogue fictive. Pour chaque drogue, on sait si la personne ne la jamais consommé, en a consommé il y a plus de dix ans, consommé il y a moins de dix ans, moins d'un an, moins d'un mois, moins d'une semaine ou dans la dernière journée.\
 Ces données là ne sont pas des floats mais des string de la forme CLx où x est remplacé par un chiffre indiquant une certaine classe (CL0 = n'a jamais consommé cette drogue, CL7 = en a consommé dans la journée).
 
 ### Présentations des tâches prévus
@@ -23,7 +23,7 @@ Ces données là ne sont pas des floats mais des string de la forme CLx où x es
 Notre dataset nous permettait d'aborder plusieurs problèmes de classifications différents.
 Nous avons décider de d'abord effectuer une classification binaire sur une drogue (le cannabis) pour savoir si une personne est consommatrice ou non.\
 Ensuite nous souhaitions réaliser une classification multilabel permettant de savoir si une personne consomme ou non chacune des drogues.\
-Dans tous les cas, nous n'allons pas gérer la date dela consommation (CLx, comme expliqué dans la partie précédente).
+Dans tous les cas, nous n'allons pas gérer la date de la consommation (CLx, comme expliqué dans la partie précédente).
 
 
 ## Préprocessing
@@ -53,13 +53,13 @@ Nous avons effectuez une séparation du dataset en conservant 20% des données p
 ### Choix de la métrique
 
 Dans le cadre d'une classification binaire plusieurs métriques sont possibles: precision , accuracy, sensitivity, specitificity.
-On note: TP(resp FP) les vrais(resp faux) positifs, TN les vrais(resp faux) négatifs,
+On note: TP(resp FP) les vrais(resp faux) positifs, TN(resp FN) les vrais(resp faux) négatifs,
 $$Sensitivity = TP/(TP+FN)$$ 
 et $$ Specitfity = TN/(TN+FP) $$ 
 
 Dans notre cas, nous avons choisi la balanced accuracy score :$$ Balanced Accuracy = \frac{(Sensitivity + Specificity)}{2}$$  
 
-Ce choix de score s'explique par le fait que par précaution même si les données sont équilibrées il s'avère que cela est la meilleure métrique, au pire si elles sont balancées cela revient au même que d'utiliser une l'accuracy score classique.
+Ce choix de score s'explique par le fait que par précaution même si les données sont équilibrées il s'avère que cela est la meilleure métrique, au pire si elles sont balancées cela revient au même que d'utiliser l'accuracy score classique.
 
 ### Résultat du modèle 
 ![Plot de l'arbre de décision](./images/arbre_de_decision_cannabis.png)
@@ -72,7 +72,7 @@ Nous n'avons donc pas réussi à améliorer notre model plus que cela et nous no
 
 
 Nous remarquons tout de même plusieurs choses par la lecture de l'arbre de décision.
-Les features qui semblent être intéressantes sont la position géographique, l'âge et la recherche de sensation de l'individu.\
+Les features qui semblent être intéressantes sont la position géographique, l'âge et la recherche de sensation de l'individu.
 
 
 ## Analyse plus avancé des données  
