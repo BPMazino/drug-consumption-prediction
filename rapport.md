@@ -41,7 +41,11 @@ Nous avons choisi de réaliser notre classification binaire avec le cannabis car
 Nous avons choisi d'utiliser un arbre de décision pour effectuer cette classification car on peut facilement visualiser les différents branchement.  
 Nous avons effectuez une séparation du dataset en conservant 20% des données pour le test final et 80% pour l'entrainement et la validation.  
 
+![Plot de l'arbre de décision](./images/arbre_de_decision_cannabis.png)
+
 Nous avons ensuite fait des tests d'hyper-paramètres avec de la cross-validation pour essayer de trouver quelle manière de limiter la taille de l'arbre était la plus efficace. Cependant quelque soit le paramètre choisi, on restait à un score de balanced accuracy d'environ 0.80, seul l'overfitting variait.  
+
+![Figures des tests d'hyper-paramètres pour l'arbre de décision](./images/test_hyperparam_cannabis.png)
 
 Nous n'avons donc pas réussi à améliorer notre model plus que cela et nous nous sommes demandé si avec un autre modèle nous aurions pu avoir de meilleurs résultats.
 
@@ -52,22 +56,29 @@ Après n'avoir pas réussi à obtenir de meilleur résultat avec notre premier m
 
 Nous avons d'abord réalisé une matrice de corrélation qui nous a permis de voir que la plupart des résultat des tests psychologiques n'étaient que peu corréler entre eux. Les plus importantes corrélations étaient entre l'impulsivité et la recherche de sensation ainsi que entre l'ouverture à l'expérience et la recherche de sensation. On pouvait aussi voir que le névrosisme et l'extraversion était plutôt inversement corréler.  
 
+![Matrice de corrélation](./images/matrice_de_correlation.png)
+
 Nous avons ensuite observé la corrélation entre chacune des caractéristique et la consommation de cannabis. Ces corrélations correspondaient aux branchement que nous avions avec l'arbre de décision.  
 
 Après cela, nous avons comparé différent models et nous avons pu observé qu'utiliser un arbre de décision pour réaliser cette classification n'était pas le meilleur choix. Utiliser une random forest ou une régression linéaire aurait été plus efficace.  
 
+![Figure de comparaison de plusieurs models](./images/model_comparaison.png)
 
 ## Classification multi label
-Choix du model(arbre de decision puis randomForest), choix des drogues à prédire, test hyper parametre, matrices de confusion  
-Conclusion : pas de très bon résultat, on aurait surement pu faire mieux avec plusieurs classificateurs binaires si on avait le temps de les entrainer  
 
 Pour réaliser une classification multi label, nous avons décider de nous occuper uniquement des 15 drogues illégales. Nous avons donc retirer les drogues suivantes : chocolat, cafféine et alcohol ainsi que semeron puisque ce n'est pas une vraie drogue.  
 
 Nous avons d'abord fait la classification avec un arbre de décision pour pouvoir comparer nos résultats avec la classification bianaire. Pour afficher nos résultats, nous avons choisi de faire une matrice de confusion par drogue ainsi que de calculer les roc auc score et balanced accuracy score moyens.  
-Nous avons obtenue une balanced accuracy de 0.60. Il n'y avait que quelques drogues qui étaient pas trop mal classé. Certaines drogues pour lesquelles il y a très peu de consommateurs n'étaient pas vraiment classé, tous les échantillons étaient considéré comme non-consommateur.  
+Nous avons obtenue une balanced accuracy de 0.62. Il n'y avait que quelques drogues qui étaient pas trop mal classé. Certaines drogues pour lesquelles il y a très peu de consommateurs n'étaient pas vraiment classé, tous les échantillons étaient considéré comme non-consommateur.  
+
+![Matrices de confusion avec l'arbre de décision](./images/matrice_de_confusion_arbre_de_decision.png)
 
 Nous avons ensuite fait la classification avec une random forest puisque cela semblait être un des meilleurs modèles selon nos analyses précédentes et qu'elle utilise encore des arbres de décisions. Nous nous sommes aussi dit que le hasard qu'apportait la random forest permettrait peut-être de moins être affecté par le problème d'équilibrage entre les consommateurs et les non-consommateurs de certaines drogues.  
-Avec la random forest nous restions à un balanced accuracy score d'environ 0.60 donc nous avons réaliser des tests d'hyper-paramètres pour essayer d'améliorer nos résultats mais les différents tests ne permettaient pas d'améliorer le score, juste de connaître l'overfitting.  
+Avec la random forest nous restions à un balanced accuracy score d'environ 0.63 donc nous avons réaliser des tests d'hyper-paramètres pour essayer d'améliorer nos résultats mais les différents tests ne permettaient pas d'améliorer le score de manière remarquable, juste de connaître l'overfitting.  
+
+![Matrices de confusion avec la random forest](./images/matrice_de_confusion_random_forest.png)
+
+![Figure du test des hyper-paramètres de la random forest](./images/test_hyperparam_random_forest.png)
 
 Nous pensons qu'en réalisant un model de classification binaire pour chacune des drogues nous aurions sûrement pu avoir de meilleurs résultats, cependant cela nous aurais pris bien plus de temps.
 
