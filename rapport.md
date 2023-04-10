@@ -38,6 +38,8 @@ Nous avons aussi appliquer une fonction permettant de standardiser toutes nos va
 
 L'arbre de décision est un algorithme de classification. Il consiste a créé des noeuds. Chaque noeud pose un seuil sur une feature qui sépare les données en deux. Avec les hyper paramètres que nous avons utilisé, ce seuil est définie en parcourant toutes les features pour trouver la meilleur séparation, c'est-à-dire, dans le cas de notre classification binaire, le plus de consommateurs et le moins de non-consommateurs d'un côté et inversement de l'autre côté. Ces noeuds permettent de classer les données dans différentes feuilles où l'ont peut supposer la classe des données dedans.
 
+Il faut faire attention car les Arbres de décision ont tendance à faire de l'overfitting.
+
 ## Classification binaire pour une drogue
 
 Nous avons choisi de réaliser notre classification binaire avec le cannabis car c'est la drogue pour laquelle le nombre de consommateurs est le plus proche du nombre de non consommateurs. Nous nous sommes donc dit que ce serait plus pratique pour pouvoir avoir un model efficace.  
@@ -69,6 +71,8 @@ Après cela, nous avons comparé différent models et nous avons pu observé qu'
 ![Figure de comparaison de plusieurs models](./images/model_comparaison.png)
 
 ## Random Forest
+
+Random Forest utilise le principe de Decision Tree dans son fonctionnement. Il va créé de nombreux arbres de décision puis faire la moyenne de chaque arbre pour parvenir à un résultat. Ceci dit, chaque arbre sera différent car les données d'entrée de chacun seront différente et que à la place de parcourir toutes les features à chaque noeud, seul une partie sera exploré. Ce modèle peut limiter l'overfitting possible du décision tree.
 
 ## Classification multi label
 
