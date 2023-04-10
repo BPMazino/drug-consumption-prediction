@@ -9,13 +9,16 @@ Mesbah Slimane
 
 ## Introduction 
 Dans ce projet, nous avons cherché à analyser et prédire la consommation de drogues chez les individus à partir d'un ensemble de données sur les caractéristiques démographiques et psychologiques. Ce rapport décrit en détail les différentes étapes de notre projet, y compris la préparation des données, l'exploration des données, la construction de modèles de prédiction et l'évaluation de leur performance.
+
 ## Présentation du jeu de données
 ### Description des données
 Le jeu de données est nommé Drug consumption (quantified) Data Set.
 Link : <https://archive.ics.uci.edu/ml/datasets/Drug+consumption+%28quantified%29>  
 
 Les colonnes de ce dataset correspondent à un ID et différentes caractéristiques des personnes ayant participé à l'étude : âge, genre, niveau d'éducation, pays de résidence, ethnicité ainsi que des résultats aux tests psychologiques NEO-FFI-R, BIS-11 et impSS. Ces tests permettent de mesurer les caractéristiques suivantes : névrosisme, extraversion, ouverture à l'expérience, agréabilité, conscienciosité, impulsivité et la recherche de sensation.\
-Dans le jeu données toutes les valeurs sont des floats ce qui ne pose pas de problème pour certaines caractéristique comme les résultats aux tests psychologiques mais qui a moins de sens pour d'autres informations comme le genre ou le pays de résidence.  
+Dans le jeu données toutes les valeurs sont des floats ce qui ne pose pas de problème pour certaines caractéristique comme les résultats aux tests psychologiques mais qui a moins de sens pour d'autres informations comme le genre ou le pays de résidence.\
+
+Parmi les personnes ayant participé à l'étude, il y a un nombre équivalent d'hommes et de femmes. On peut voir que les jeunes sont plus représenté avec environ un tiers des participants ayant entre 18 et 24 ans. Ces personnes viennent majoritairement du Royaume-Unis et des Etats-Unis (respectivement 55% et 30% des personnes). En observant le niveau d'études des participants, on se rend compte que peu on arrêté les cours à 18 ans ou avant, la majorité ont été jusqu'à l'université. Les résultats des tests psychologiques semble plus dure à analyser, en traçant des histogramme on peut tout de même voir que la distribution des résultats ressemble à des gaussiennes.
 
 Il y a en plus de cela 19 colonnes qui nous donnent des informations sur la consommation de différentes drogues, dont une drogue fictive. Pour chaque drogue, on sait si la personne ne la jamais consommé, en a consommé il y a plus de dix ans, consommé il y a moins de dix ans, moins d'un an, moins d'un mois, moins d'une semaine ou dans la dernière journée.\
 Ces données là ne sont pas des floats mais des string de la forme CLx où x est remplacé par un chiffre indiquant une certaine classe (CL0 = n'a jamais consommé cette drogue, CL7 = en a consommé dans la journée).
@@ -142,7 +145,7 @@ La courbe ROC nous permet d'avoir une autre perspective sur les modèles par rap
 
 Pour réaliser une classification multi label, nous avons décider de nous occuper uniquement des 15 drogues illégales. Nous avons donc retirer les drogues suivantes : chocolat, cafféine et alcohol ainsi que semeron puisque ce n'est pas une vraie drogue.  
 
-Nous avons d'abord fait la classification avec un arbre de décision car cet algorythme peut traiter une target multilabel. En effet, les noeuds vont chercher à trouver la meilleur séparation en regardant tout les labels. La conséquence que l'ont va observer est que les labels déséquilibrés vont mal être prédits.
+Nous avons d'abord fait la classification avec un arbre de décision car cet algorithme peut traiter une target multilabel. En effet, les noeuds vont chercher à trouver la meilleur séparation en regardant tous les labels. La conséquence que l'ont va observer est que les labels déséquilibrés vont être mal prédits.
 
 De plus, nous pourrons comparer nos résultats avec la classification bianaire fait précédemment. Pour afficher nos résultats, nous avons choisi de faire une matrice de confusion par drogue ainsi que de calculer les roc auc score et balanced accuracy score moyens. 
 
@@ -166,5 +169,5 @@ Nous pensons que si nous avions réalisé un modèle de classification binaire p
 
 En conclusion, bien que la classification multi-label pour plusieurs drogues ait présenté des défis, notamment en raison du déséquilibre entre les consommateurs et les non-consommateurs pour certaines drogues, les modèles de forêt aléatoire ont permis d'obtenir des résultats légèrement meilleurs que les arbres de décision. Il pourrait être intéressant d'explorer d'autres modèles ou approches pour améliorer davantage la performance de la classification multi-label notamment le boosting ou l'apprentissage ensembliste.
 
-Cependant ces deux derniers aurait demandé des explications fournies car nous n'avons pas vu ces deux méthodes en cours. Cependant en général ces deux méthodes fournissent de bien meilleurs résultats.
+Cependant ces deux derniers aurait demandé des explications fournies car nous n'avons pas vu ces deux méthodes en cours. Cependant en général, ces deux méthodes fournissent de bien meilleurs résultats.
 
